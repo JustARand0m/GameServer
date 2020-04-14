@@ -15,15 +15,46 @@ export class CheckersBoard implements Board {
     ) {
         this.grid = this.initBoard();
     }
+
+    place(point: Point, piece: Piece): boolean {
+        if(!this.isPiece(point)) {
+            this.grid[point.row][point.col] = piece;
+            return true;
+        }
+        return false;
+    }
     
-    place(move: CheckersMove): boolean {
+    play(move: Move): boolean {
         if(!this.isOnBoard(move.destPoint)) {
             return false;
         }
-        if(!this.isPiece(move.srcPoint)) {
+        if(!this.isPiece(move.srcPoint) || this.isPiece(move.destPoint)) {
             return false
         }
 
+        if(move.piece.type === CheckersPieceTypes.man) {
+            const rowDiff = Math.abs(move.srcPoint.row - move.destPoint.row);
+            const colDiff = Math.abs(move.srcPoint.col - move.destPoint.col);
+
+            // check if move is capture
+            if((rowDiff === 2) && colDiff === 2) {
+                if(this.capture(move)) {
+                    return true;
+                } else {
+                    return false;
+                }
+            }
+            // normal move
+            if(rowDiff === 1 && colDiff === 1) {
+                this.normalMove(move);
+                return true;
+            }
+            return false
+        } else {
+
+
+        }
+        
         // direction of move for each color
         // is capture
         // is legal man or king
@@ -95,6 +126,34 @@ export class CheckersBoard implements Board {
             }
         }
         return grid;
+    }
+
+    private capture(move: Move): boolean {
+        if(move.piece.type === CheckersPieceTypes.man) {
+            const middlePoint: Point = {
+                row: (move.destPoint.row + move.srcPoint.row) / 2,
+                col: (move.srcPoint.col + move.destPoint.col) / 2
+            }
+
+            // check if theres a pice inbetween the move, that gets captured
+            if(this.isPiece(middlePoint)) {
+                if(this.getPiece(middlePoint).owner != move.piece.owner) {
+                    return false;
+                }
+                this.remove(middlePoint);
+                this.remove(move.srcPoint);
+                this.place(move.destPoint, move.piece);
+                return true;
+            }          
+        } else if(move.piece.type === CheckersPieceTypes.king){
+            return true;
+        } 
+        return false;
+    }
+
+    private normalMove(move: Move): void {
+        this.remove(move.srcPoint);
+        this.place(move.destPoint, move.piece);
     }
 
     private isPiece(point: Point): boolean {

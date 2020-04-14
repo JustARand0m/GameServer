@@ -1,21 +1,22 @@
 import { Player } from "./interfaces/Player-interface";
 
-export enum defaultColors {
+export enum DefaultColors {
     white = 0,
     black = 1
 }
 
-export class defaultPlayer implements Player {
-    public colors: defaultColors[] = [defaultColors.white, defaultColors.black];
+export class DefaultPlayer implements Player {
+    public colors: DefaultColors[] = [DefaultColors.white, DefaultColors.black];
+
     constructor(
-        public ownColor: defaultColors
+        public ownColor: DefaultColors
     ){}
 
-    color(): defaultColors {
+    color(): DefaultColors {
         return this.ownColor;
     }
 
-    others(): defaultColors {
+    others(): DefaultColors {
         return this.colors.filter((color) => color != this.ownColor)[0];
     }
 

@@ -7,7 +7,8 @@ export interface Board {
     cols: number;
     grid: Piece[][];
     
-    place: (move: Move) => boolean;
+    place: (point: Point, piece: Piece) => boolean;
+    play: (move: Move) => boolean;
     isOnBoard: (point: Point) => boolean;
     getPiece: (point: Point) => Piece;
     remove: (point: Point) => boolean;
