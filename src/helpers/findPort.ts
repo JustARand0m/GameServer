@@ -10,15 +10,12 @@ const lastGameServerPort = 65535;
  * 
  * @returns the port as promise
  */
-export default async function findPort(): Promise<Number> {
+export default async function findPort(port: string | undefined): Promise<Number> {
     return new Promise(async (resolve, reject) => {
-        const processPort: string[] = process.argv.slice(2);
-        let port: number = processPort.length === 0 ? -1 : +processPort[0];
-
-        if(port === -1) {
+        if(port === undefined) {
             resolve(await portfinder.getPortPromise({port: firstGameServerPort, stopPort: lastGameServerPort}));
         } else {
-            resolve(port);
+            resolve(+port);
         }
     });
 }

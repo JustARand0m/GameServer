@@ -10,6 +10,7 @@ const msgLengthByteLength = 4;
  * @param buffer Buffer from tcp socket that contains the message
  */
 export default function msgParser(buffer: Buffer): Message {
+    console.log('recieved msg:', buffer);
     let msg: number[] = [];
     const msgType: number = buffer.readUInt8(0);
     const msgLength: number = buffer.readUIntBE(typeByteLength, msgLengthByteLength);

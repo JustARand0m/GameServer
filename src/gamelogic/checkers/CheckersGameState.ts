@@ -11,22 +11,26 @@ export class CheckersGameState implements GameState{
     ) {}
 
     applyMove(move: Move): GameState {
-
+        return this;
     }
 
     newGame(): GameState {
+        return this;
 
     }
 
     isValidMove(move: Move): boolean{
+        return true;
 
     }
 
     isOver(): boolean {
+        return true;
 
     }
 
     isWinner(player: Player): boolean {
+        return true;
 
     }
 

@@ -1,7 +1,7 @@
 import { Move } from "../interfaces/Move-interface";
 import { Point } from "../interfaces/Point-inteface";
 import { Piece } from "../interfaces/Piece-interface";
-import { defaultColors } from "../defaultPlayer";
+import { DefaultColors } from "../defaultPlayer";
 
 export enum CheckersDirection {
     black = 0,
@@ -21,7 +21,7 @@ export class CheckersMove implements Move {
     }
 
     direction(): CheckersDirection {
-        if(this.piece.owner?.color() === defaultColors.black) {
+        if(this.piece.owner?.color() === DefaultColors.black) {
             return CheckersDirection.black;
         } else {
             return CheckersDirection.white;

@@ -3,7 +3,7 @@ import { Move } from "../interfaces/Move-interface";
 import { Point } from "../interfaces/Point-inteface";
 import { Piece } from "../interfaces/Piece-interface";
 import { CheckersPiece, CheckersPieceTypes } from "./CheckersPiece";
-import { defaultPlayer, defaultColors } from "../defaultPlayer";
+import { DefaultPlayer, DefaultColors } from "../defaultPlayer";
 import { CheckersMove } from "./CheckersMove";
 
 export class CheckersBoard implements Board {
@@ -101,9 +101,9 @@ export class CheckersBoard implements Board {
                 if(y % 2 === 0) {
                     if(x % 2 === 0) {
                         if(y < 3) {
-                            grid[y][x] = new CheckersPiece(CheckersPieceTypes.man, new defaultPlayer(defaultColors.white), point);
+                            grid[y][x] = new CheckersPiece(CheckersPieceTypes.man, new DefaultPlayer(DefaultColors.white), point);
                         } else if(y > 4) {
-                            grid[y][x] = new CheckersPiece(CheckersPieceTypes.man, new defaultPlayer(defaultColors.black), point);
+                            grid[y][x] = new CheckersPiece(CheckersPieceTypes.man, new DefaultPlayer(DefaultColors.black), point);
                         } else {
                             grid[y][x] = new CheckersPiece(CheckersPieceTypes.empty, undefined, point);
                         }
@@ -113,9 +113,9 @@ export class CheckersBoard implements Board {
                 } else {
                     if(x % 2 != 0) {
                         if(y < 3) {
-                            grid[y][x] = new CheckersPiece(CheckersPieceTypes.man, new defaultPlayer(defaultColors.white), point);
+                            grid[y][x] = new CheckersPiece(CheckersPieceTypes.man, new DefaultPlayer(DefaultColors.white), point);
                         } else if(y > 4) {
-                            grid[y][x] = new CheckersPiece(CheckersPieceTypes.man, new defaultPlayer(defaultColors.black), point);
+                            grid[y][x] = new CheckersPiece(CheckersPieceTypes.man, new DefaultPlayer(DefaultColors.black), point);
                         } else {
                             grid[y][x] = new CheckersPiece(CheckersPieceTypes.empty, undefined, point);
                         }
